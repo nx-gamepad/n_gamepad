@@ -2,14 +2,14 @@ group 'com.marvinvogl.n_gamepad'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '1.8.10'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,7 +25,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    if (project.android.hasProperty("namespace")) {
+        namespace = "com.marvinvogl.n_gamepad"
+    }
+
+    compileSdk 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,10 +45,10 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdk 19
     }
-}
 
-dependencies {
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    dependencies {
+        implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+    }
 }
