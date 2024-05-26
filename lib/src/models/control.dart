@@ -1,5 +1,6 @@
 enum Control {
-  gyro,
+  gyroscope,
+  accelerometer,
   a,
   b,
   x,

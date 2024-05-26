@@ -4,20 +4,21 @@ import android.view.KeyEvent
 
 class Gamepad {
     val gyroscope = Gyroscope()
+    val accelerometer = Accelerometer()
 
     val button = mapOf(
-        KeyEvent.KEYCODE_BUTTON_A to Button('a', 0),
-        KeyEvent.KEYCODE_BUTTON_B to Button('b', 1),
-        KeyEvent.KEYCODE_BUTTON_X to Button('x', 2),
-        KeyEvent.KEYCODE_BUTTON_Y to Button('y', 3),
-        KeyEvent.KEYCODE_BUTTON_L1 to Button('l', 4),
-        KeyEvent.KEYCODE_BUTTON_R1 to Button('r', 5),
-        KeyEvent.KEYCODE_BUTTON_L2 to Button('u', 6),
-        KeyEvent.KEYCODE_BUTTON_R2 to Button('v', 7),
-        KeyEvent.KEYCODE_BUTTON_THUMBL to Button('t', 8),
-        KeyEvent.KEYCODE_BUTTON_THUMBR to Button('z', 9),
-        KeyEvent.KEYCODE_BUTTON_SELECT to Button('c', 10),
-        KeyEvent.KEYCODE_BUTTON_START to Button('s', 11),
+        KeyEvent.KEYCODE_BUTTON_A to Button('a'.code),
+        KeyEvent.KEYCODE_BUTTON_B to Button('b'.code),
+        KeyEvent.KEYCODE_BUTTON_X to Button('x'.code),
+        KeyEvent.KEYCODE_BUTTON_Y to Button('y'.code),
+        KeyEvent.KEYCODE_BUTTON_L1 to Button('l'.code),
+        KeyEvent.KEYCODE_BUTTON_R1 to Button('r'.code),
+        KeyEvent.KEYCODE_BUTTON_L2 to Button('u'.code),
+        KeyEvent.KEYCODE_BUTTON_R2 to Button('v'.code),
+        KeyEvent.KEYCODE_BUTTON_THUMBL to Button('t'.code),
+        KeyEvent.KEYCODE_BUTTON_THUMBR to Button('z'.code),
+        KeyEvent.KEYCODE_BUTTON_SELECT to Button('c'.code),
+        KeyEvent.KEYCODE_BUTTON_START to Button('s'.code),
     )
 
     val dpad = Dpad()
@@ -27,7 +28,8 @@ class Gamepad {
     val triggerRight = Trigger(Hand.RIGHT, button[KeyEvent.KEYCODE_BUTTON_R2]!!)
 
     val control = mapOf(
-        "gyro" to gyroscope,
+        "gyroscope" to gyroscope,
+        "accelerometer" to accelerometer,
         "a" to button[KeyEvent.KEYCODE_BUTTON_A]!!,
         "b" to button[KeyEvent.KEYCODE_BUTTON_B]!!,
         "x" to button[KeyEvent.KEYCODE_BUTTON_X]!!,

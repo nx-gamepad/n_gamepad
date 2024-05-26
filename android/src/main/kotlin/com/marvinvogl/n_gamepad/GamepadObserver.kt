@@ -20,6 +20,7 @@ class GamepadObserver : DefaultLifecycleObserver {
     private lateinit var sensorManager: SensorManager
 
     private var gyroscopeSensor: Sensor? = null
+    private var accelerometerSensor: Sensor? = null
 
     val gamepad = Gamepad()
     val connection = Connection(this)
@@ -34,6 +35,7 @@ class GamepadObserver : DefaultLifecycleObserver {
         layoutParams = activity.window.attributes
         sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         val view = activity.window.decorView
 
@@ -54,15 +56,19 @@ class GamepadObserver : DefaultLifecycleObserver {
         super.onResume(owner)
 
         connection.bind()
+
         if (gyroscopeSensor != null) {
             sensorManager.registerListener(sensor, gyroscopeSensor, SensorManager.SENSOR_DELAY_GAME)
+        }
+        if (accelerometerSensor != null) {
+            sensorManager.registerListener(sensor, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME)
         }
     }
 
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
 
-        if (gyroscopeSensor != null) {
+        if (gyroscopeSensor != null || accelerometerSensor != null) {
             sensorManager.unregisterListener(sensor)
         }
         connection.close()
