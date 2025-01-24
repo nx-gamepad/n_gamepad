@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../helpers/timer.dart';
 
+import '../models/component.dart';
 import '../models/game.dart';
-import '../models/layout.dart';
 import '../models/protocol.dart';
 
 import '../connection.dart';
@@ -39,31 +39,31 @@ class _GamePageState extends State<GamePage> with WidgetsBindingObserver {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final current = snapshot.data!;
-            final layout = widget.game.build(current);
+            final component = widget.game.build(current);
 
-            if (layout.screenTimeout == null) {
+            if (component.screenTimeout == null) {
               timer?.cancel();
               timer = null;
             } else if (timer == null) {
               timer = ObservableTimer(
-                layout.screenTimeout!.onInteraction,
+                component.screenTimeout!.onInteraction,
                 () => Connection.gamepad.switchScreenBrightness(false),
                 () => Connection.gamepad.switchScreenBrightness(true),
               );
             } else if (previous != current) {
-              resetTimer(layout.screenTimeout!.onStateChange);
+              resetTimer(component.screenTimeout!.onStateChange);
             } else {
-              resetTimer(layout.screenTimeout!.onStateUpdate);
+              resetTimer(component.screenTimeout!.onStateUpdate);
             }
             previous = current;
 
             return Listener(
-              onPointerDown: (event) => cancelTimer(layout.screenTimeout),
-              onPointerUp: (event) => startTimer(layout.screenTimeout),
+              onPointerDown: (event) => cancelTimer(component.screenTimeout),
+              onPointerUp: (event) => startTimer(component.screenTimeout),
               behavior: HitTestBehavior.translucent,
               child: Container(
-                color: layout.backgroundColor,
-                child: layout.widget,
+                color: component.backgroundColor,
+                child: component.layout,
               ),
             );
           }

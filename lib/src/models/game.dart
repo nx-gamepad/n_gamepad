@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../pages/game_page.dart';
 
-import 'layout.dart';
+import 'component.dart';
 import 'protocol.dart';
 
 abstract class Game {
@@ -47,11 +47,11 @@ abstract class Game {
     );
   }
 
-  Layout build(StatePacket packet);
+  Component build(StatePacket packet);
 }
 
 enum GameEffect {
-  screen,
+  light,
   rumble,
   sound,
 }
