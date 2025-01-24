@@ -24,7 +24,7 @@ class Connection(
     }
 
     fun send(buffer: ControlBuffer): Boolean {
-        if (buffer.bitfield != 0) {
+        if (buffer.populated) {
             send(buffer.array, buffer.length)
         }
         return true

@@ -3,9 +3,13 @@ package com.marvinvogl.n_gamepad
 import android.view.KeyEvent
 
 class Button(
-    private val data: Char,
-    private val key: Int,
-) : Control(0b00000100) {
+    char: Char,
+) : Control(1, 0b00000001) {
+    companion object {
+        private var ordinal = 0
+    }
+    private val data = intArrayOf(ordinal++, char.code)
+
     private var state = false
 
     fun onEvent(event: KeyEvent): Boolean {
@@ -13,37 +17,43 @@ class Button(
             if (!state) {
                 state = true
 
-                return prepareKeyDownData(event.deviceId, KeyListener.buffer)
+                transferPlatformData(event.deviceId)
+
+                return prepareKeyDownData(KeyListener.buffer)
             }
         }
         if (event.action == KeyEvent.ACTION_UP) {
             if (state) {
                 state = false
 
-                return prepareKeyUpData(event.deviceId, KeyListener.buffer)
+                transferPlatformData(event.deviceId)
+
+                return prepareKeyUpData(KeyListener.buffer)
             }
         }
         return false
     }
 
-    private fun prepareKeyDownData(id: Int, buffer: ControlBuffer): Boolean {
-        Handler.button.sink?.success(listOf(key, id, state))
+    private fun transferPlatformData(id: Int) {
+        Handler.button.sink?.success(listOf(data.first(), id, state))
+    }
 
+    private fun prepareKeyDownData(buffer: ControlBuffer): Boolean {
         if (transmission) {
-            buffer.bitfield = bitmask
-            buffer.putCharData(data)
+            buffer.bitfield(this)
+            buffer.putByteData(0b00101000)
+            buffer.putIntData(data)
 
             return true
         }
         return false
     }
 
-    private fun prepareKeyUpData(id: Int, buffer: ControlBuffer): Boolean {
-        Handler.button.sink?.success(listOf(key, id, state))
-
+    private fun prepareKeyUpData(buffer: ControlBuffer): Boolean {
         if (transmission) {
-            buffer.bitfield = bitmask
-            buffer.putCharData(data.uppercaseChar())
+            buffer.bitfield(this)
+            buffer.putByteData(0b00100000)
+            buffer.putIntData(data)
 
             return true
         }

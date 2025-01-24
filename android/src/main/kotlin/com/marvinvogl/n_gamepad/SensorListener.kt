@@ -9,7 +9,7 @@ class SensorListener(
     private val connection: Connection,
 ) : SensorEventListener {
     companion object {
-        val buffer = ControlBuffer(26, 0b0010)
+        val buffer = ControlBuffer(26, 2, 0b0010)
     }
 
     override fun onSensorChanged(event: SensorEvent?) {

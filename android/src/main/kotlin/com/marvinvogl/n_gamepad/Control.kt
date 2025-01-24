@@ -4,29 +4,30 @@ import android.view.MotionEvent
 import kotlin.math.abs
 
 abstract class Control(
+    val block: Int,
     val bitmask: Int,
 ) {
-    private var stop = true
-    private var block = true
+    private var allowed = true
+    private var accepted = true
 
-    val transmission get() = stop && block
+    val transmission get() = allowed && accepted
 
     open fun stop() {
-        stop = false
+        allowed = false
     }
 
     open fun block() {
-        block = false
+        accepted = false
     }
     
     open fun resume(safe: Boolean): Boolean {
+        val temp = transmission
+        accepted = true
+
         if (!safe) {
-            val temp = transmission
-            stop = true
-            block = true
+            allowed = true
             return !temp
         }
-        block = false
         return transmission
     }
 

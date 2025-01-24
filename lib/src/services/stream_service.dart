@@ -335,6 +335,50 @@ class StreamService {
     _state != null ? _game!.closePage() : reset();
   }
 
+  /// Sends a request to the server to explicitly change the game state to the
+  /// specified [state] using the [Connection] instance.
+  ///
+  /// The [state] parameter should be an enumeration representing the desired
+  /// state to be set on the server.
+  ///
+  /// Example usage:
+  ///
+  /// ```dart
+  /// streamService.requestState(GameState.paused);
+  /// ```
+  ///
+  /// In this example, the `GameState.paused` state is requested, which would
+  /// pause the game on the server and send a confirmation in form of a
+  /// [StatePacket] if this state change succeeded.
+  void requestState(Enum state) {
+    _connection.sendRequest(<int>[
+      Client.state,
+      state.index,
+    ]);
+  }
+
+  /// Sends a request to the server to stop sending packets of the specified
+  /// [update] using the [Connection] instance.
+  ///
+  /// The [update] parameter should be an enumeration representing the desired
+  /// continuous update to be received from the server until it was deactivated.
+  ///
+  /// Example usage:
+  ///
+  /// ```dart
+  /// streamService.requestUpdate(GameUpdate.position);
+  /// ```
+  ///
+  /// In this example, the `GameUpdate.position` update is requested, which
+  /// would deactivate the constant updates of [UpdatePacket]s about a player's
+  /// position.
+  void requestUpdate(Enum update) {
+    _connection.sendRequest(<int>[
+      Client.update,
+      update.index,
+    ]);
+  }
+
   /// Sends a request to the server to perform the specified [action] with the
   /// given [data] using the [Connection] instance.
   ///
@@ -358,50 +402,6 @@ class StreamService {
       Client.action,
       action.index,
       ...data,
-    ]);
-  }
-
-  /// Sends a request to the server to explicitly change the game state to the
-  /// specified [state] using the [Connection] instance.
-  ///
-  /// The [state] parameter should be an enumeration representing the desired
-  /// state to be set on the server.
-  ///
-  /// Example usage:
-  ///
-  /// ```dart
-  /// streamService.requestState(GameState.paused);
-  /// ```
-  ///
-  /// In this example, the `GameState.paused` state is requested, which would
-  /// pause the game on the server and only send a confirmation in form of a
-  /// [StatePacket] if this state change was possible.
-  void requestState(Enum state) {
-    _connection.sendRequest(<int>[
-      Client.state,
-      state.index,
-    ]);
-  }
-
-  /// Sends a request to the server to retrieve the specified [update] using the
-  /// [Connection] instance.
-  ///
-  /// The [update] parameter should be an enumeration representing the desired
-  /// continuous update to be received from the server until it was deactivated.
-  ///
-  /// Example usage:
-  ///
-  /// ```dart
-  /// streamService.requestUpdate(GameUpdate.position);
-  /// ```
-  ///
-  /// In this example, the `GameUpdate.position` update is requested, which
-  /// would activate constant updates to be received about a player's position
-  /// in form of a valid [UpdatePacket].
-  void requestUpdate(Enum update) {
-    _connection.sendRequest(<int>[
-      Client.update,
-      update.index,
     ]);
   }
 }

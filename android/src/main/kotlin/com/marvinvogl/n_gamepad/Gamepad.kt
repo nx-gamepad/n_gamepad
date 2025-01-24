@@ -7,18 +7,18 @@ class Gamepad {
     val accelerometer = Accelerometer()
 
     val button = mapOf(
-        KeyEvent.KEYCODE_BUTTON_A to Button('a'.code),
-        KeyEvent.KEYCODE_BUTTON_B to Button('b'.code),
-        KeyEvent.KEYCODE_BUTTON_X to Button('x'.code),
-        KeyEvent.KEYCODE_BUTTON_Y to Button('y'.code),
-        KeyEvent.KEYCODE_BUTTON_L1 to Button('l'.code),
-        KeyEvent.KEYCODE_BUTTON_R1 to Button('r'.code),
-        KeyEvent.KEYCODE_BUTTON_L2 to Button('u'.code),
-        KeyEvent.KEYCODE_BUTTON_R2 to Button('v'.code),
-        KeyEvent.KEYCODE_BUTTON_THUMBL to Button('t'.code),
-        KeyEvent.KEYCODE_BUTTON_THUMBR to Button('z'.code),
-        KeyEvent.KEYCODE_BUTTON_SELECT to Button('c'.code),
-        KeyEvent.KEYCODE_BUTTON_START to Button('s'.code),
+        KeyEvent.KEYCODE_BUTTON_A to Button('a'),
+        KeyEvent.KEYCODE_BUTTON_B to Button('b'),
+        KeyEvent.KEYCODE_BUTTON_X to Button('x'),
+        KeyEvent.KEYCODE_BUTTON_Y to Button('y'),
+        KeyEvent.KEYCODE_BUTTON_L1 to Button('l'),
+        KeyEvent.KEYCODE_BUTTON_R1 to Button('r'),
+        KeyEvent.KEYCODE_BUTTON_L2 to Button('u'),
+        KeyEvent.KEYCODE_BUTTON_R2 to Button('v'),
+        KeyEvent.KEYCODE_BUTTON_THUMBL to Button('t'),
+        KeyEvent.KEYCODE_BUTTON_THUMBR to Button('z'),
+        KeyEvent.KEYCODE_BUTTON_SELECT to Button('c'),
+        KeyEvent.KEYCODE_BUTTON_START to Button('s'),
     )
 
     val dpad = Dpad()
