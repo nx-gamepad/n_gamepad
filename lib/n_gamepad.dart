@@ -1,9 +1,8 @@
-library n_gamepad;
+library;
 
 export 'src/connection.dart';
 
 export 'src/gamepad.dart' show Gamepad;
-export 'src/gamepad_development.dart';
 
 export 'src/models/component.dart';
 export 'src/models/control.dart' show Control, Button, Hand;
