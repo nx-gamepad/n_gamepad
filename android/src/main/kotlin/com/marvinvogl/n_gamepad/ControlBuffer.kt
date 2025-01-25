@@ -20,7 +20,7 @@ class ControlBuffer(
         }
     }
 
-    val populated get() = bitfield.first().toInt() and 0b1111 != 0
+    val populated get() = bitfield.first() and 0b1111 != 0
 
     val array: ByteArray
         get() {
@@ -33,9 +33,9 @@ class ControlBuffer(
 
     val length: Int
         get() {
-            val temp = offset
+            val length = offset
             offset = blocks
-            return temp
+            return length
         }
 
     fun bitfield(control: Control) {

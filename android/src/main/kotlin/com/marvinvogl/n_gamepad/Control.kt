@@ -21,12 +21,12 @@ abstract class Control(
     }
     
     open fun resume(safe: Boolean): Boolean {
-        val temp = transmission
+        val before = transmission
         accepted = true
 
         if (!safe) {
             allowed = true
-            return !temp
+            return !before
         }
         return transmission
     }
