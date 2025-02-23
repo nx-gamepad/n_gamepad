@@ -1,5 +1,9 @@
 ## 0.0.5
 
+* Updated GitHub references to organization account
+
+## 0.0.5
+
 * Inputs from multiple controllers are now possible
 * Altered event channels to distinguish devices
 * Created new event channel for button inputs
