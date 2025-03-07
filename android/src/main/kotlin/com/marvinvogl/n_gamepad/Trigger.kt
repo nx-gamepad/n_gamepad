@@ -5,8 +5,10 @@ import android.view.MotionEvent
 class Trigger(
     private val hand: Hand,
     private val button: Button,
-) : Control(hand.trigger) {
+) : Control(1, hand.trigger, 0b01000000) {
     private val data = FloatArray(1)
+
+    private var threshold = 0
 
     private var z = 0f
 
@@ -18,20 +20,31 @@ class Trigger(
                 data[0] = event.getAxisValueWithMotionRange(hand.axis)
             }
 
+            threshold = if (data[0] > 0f) {
+                0b00001000
+            } else {
+                0
+            }
+
             if (z != data[0]) {
                 z = data[0]
 
-                return prepareMotionData(event.deviceId, MotionListener.buffer)
+                transferPlatformData(event.deviceId)
+
+                return prepareMotionData(MotionListener.buffer)
             }
         }
         return false
     }
 
-    private fun prepareMotionData(id: Int, buffer: ControlBuffer): Boolean {
+    private fun transferPlatformData(id: Int) {
         Handler.trigger.sink?.success(listOf(hand.ordinal, id, z))
+    }
 
+    private fun prepareMotionData(buffer: ControlBuffer): Boolean {
         if (transmission) {
-            buffer.bitfield += bitmask
+            buffer.bitfield(this)
+            buffer.putByteData(size + hand.ordinal + 1 + threshold)
             buffer.putFloatData(data)
 
             return true

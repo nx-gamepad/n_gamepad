@@ -374,8 +374,8 @@ class StreamService {
   /// ```
   ///
   /// In this example, the `GameState.paused` state is requested, which would
-  /// pause the game on the server and only send a confirmation in form of a
-  /// [StatePacket] if this state change was possible.
+  /// pause the game on the server and send a confirmation in form of a
+  /// [StatePacket] if this state change succeeded.
   void requestState(Enum state) {
     _connection.sendRequest(<int>[
       Client.state,
@@ -383,8 +383,8 @@ class StreamService {
     ]);
   }
 
-  /// Sends a request to the server to retrieve the specified [update] using the
-  /// [Connection] instance.
+  /// Sends a request to the server to stop sending packets of the specified
+  /// [update] using the [Connection] instance.
   ///
   /// The [update] parameter should be an enumeration representing the desired
   /// continuous update to be received from the server until it was deactivated.
@@ -396,8 +396,8 @@ class StreamService {
   /// ```
   ///
   /// In this example, the `GameUpdate.position` update is requested, which
-  /// would activate constant updates to be received about a player's position
-  /// in form of a valid [UpdatePacket].
+  /// would deactivate the constant updates of [UpdatePacket]s about a player's
+  /// position.
   void requestUpdate(Enum update) {
     _connection.sendRequest(<int>[
       Client.update,

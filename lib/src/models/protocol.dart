@@ -188,25 +188,17 @@ class EffectPacket {
   final List<int> data;
 }
 
-// action packet via touch
+// touch action request packet
 // |       1byte | nbytes |
 // | 0b0000_0001 |  data  |
 
-// input packet via sensor (Gyroscope)
-// |       1byte |  4bytes |  4bytes |  4bytes |
-// | 0b0000_0010 | float x | float y | float z |
+// touch state request packet
+// |       1byte | nbytes |
+// | 0b0000_0101 |  data  |
 
-// input packet via key (Button)
-// |       1byte |   1byte |
-// | 0b0000_0100 |  char a |
-
-// input packet via motion (right Trigger)
-// |       1byte |  4bytes |
-// | 0b1000_0000 | float z |
-
-// input packet via motion (right Joystick and Trigger)
-// |       1byte |  4bytes |  4bytes |  4bytes |
-// | 0b1010_0000 | float x | float y | float z |
+// touch update request packet
+// |       1byte | nbytes |
+// | 0b0000_1001 |  data  |
 
 class Client {
   static const int action = 1;
@@ -215,16 +207,16 @@ class Client {
   static const int update = 9;
 }
 
-// state packet from server
+// server state packet
 // |       1byte | nbytes |
 // | 0b0000_0100 |  data  |
 
-// update packet from server
+// server update packet
 // |       1byte | nbytes |
 // | 0b0000_1000 |  data  |
 
-// effect packet from server
-// |       1byte |  1byte |
+// server effect packet
+// |       1byte | nbytes |
 // | 0b0000_1100 |  data  |
 
 class Server {

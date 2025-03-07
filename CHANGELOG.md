@@ -1,3 +1,9 @@
+## 0.0.7
+
+* Rehauled protocol for sending input data to server
+* Added accelerometer sensor capturing
+* Adjusted control to disable sensor packets
+
 ## 0.0.6
 
 * Updated GitHub references to organization account

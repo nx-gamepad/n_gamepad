@@ -3,7 +3,7 @@ package com.marvinvogl.n_gamepad
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 
-class Gyroscope : Control(1, 0b00010000, 0b11000000) {
+class Accelerometer : Control(1, 0b00100000, 0b11000000) {
     private val data = FloatArray(3)
 
     private var x = 0f
@@ -11,7 +11,7 @@ class Gyroscope : Control(1, 0b00010000, 0b11000000) {
     private var z = 0f
 
     fun onEvent(event: SensorEvent): Boolean {
-        if (event.sensor.type == Sensor.TYPE_GYROSCOPE) {
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             data[0] = event.values[0]
             data[1] = event.values[1]
             data[2] = event.values[2]

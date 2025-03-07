@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-abstract class Layout {
-  const Layout(
-    this.widget, {
+abstract class Component {
+  const Component(
+    this.layout, {
     this.backgroundColor,
     this.screenTimeout = const ScreenTimeout(
       onInteraction: Duration(seconds: 10),
@@ -10,7 +10,7 @@ abstract class Layout {
     ),
   });
 
-  final Widget widget;
+  final Widget layout;
   final Color? backgroundColor;
   final ScreenTimeout? screenTimeout;
 }
