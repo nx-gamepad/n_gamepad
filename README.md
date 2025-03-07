@@ -1,5 +1,3 @@
-# n Gamepad
-
 A Flutter plugin to listen to game controller inputs.
 
 ## Features
