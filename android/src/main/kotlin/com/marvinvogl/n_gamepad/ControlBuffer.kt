@@ -40,11 +40,11 @@ class ControlBuffer(
 
     fun bitfield(control: Control) {
         if (control.block and 1 != 0) {
-            bitfield[control.block - 1] = bitfield[control.block - 1] or 0b10000000
+            bitfield[control.block - 1] = bitfield[control.block - 1] and 0b01111111
         } else {
-            bitfield[control.block - 2] = bitfield[control.block - 2] or 0b01000000
+            bitfield[control.block - 2] = bitfield[control.block - 2] and 0b10111111
         }
-        bitfield[control.block] = bitfield[control.block] + control.bitmask
+        bitfield[control.block] += control.bitmask
         bitfield[0] = bitfield[0] or type.toInt()
     }
 
@@ -72,9 +72,9 @@ class ControlBuffer(
     private fun reset(index: Int) {
         if (index and 1 == 0) {
             bitfield[index] = when {
-                blocks - index > 2 -> 0b00100000
-                blocks - index > 1 -> 0b00010000
-                else -> 0
+                blocks - index > 2 -> 0b11100000
+                blocks - index > 1 -> 0b11010000
+                else -> 0b11000000
             }
         } else {
             bitfield[index] = 0

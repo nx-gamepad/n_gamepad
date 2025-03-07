@@ -3,7 +3,7 @@ package com.marvinvogl.n_gamepad
 import android.view.KeyEvent
 import android.view.MotionEvent
 
-class Dpad : Control(1, 0b00000010) {
+class Dpad : Control(1, 0b00000010, 0b00100000) {
     private val data = IntArray(2)
 
     private var center = 0
@@ -66,7 +66,7 @@ class Dpad : Control(1, 0b00000010) {
     private fun prepareKeyData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b00100000 + center)
+            buffer.putByteData(size + center)
             buffer.putIntData(data)
 
             return true
@@ -77,7 +77,7 @@ class Dpad : Control(1, 0b00000010) {
     private fun prepareMotionData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b00100001)
+            buffer.putByteData(size + 1)
             buffer.putIntData(data)
 
             return true

@@ -5,7 +5,7 @@ import android.view.MotionEvent
 class Trigger(
     private val hand: Hand,
     private val button: Button,
-) : Control(1, hand.trigger) {
+) : Control(1, hand.trigger, 0b01000000) {
     private val data = FloatArray(1)
 
     private var threshold = 0
@@ -44,7 +44,7 @@ class Trigger(
     private fun prepareMotionData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b01000001 + hand.ordinal + threshold)
+            buffer.putByteData(size + hand.ordinal + 1 + threshold)
             buffer.putFloatData(data)
 
             return true

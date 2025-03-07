@@ -335,6 +335,32 @@ class StreamService {
     _state != null ? _game!.closePage() : reset();
   }
 
+  /// Sends a request to the server to perform the specified [action] with the
+  /// given [data] using the [Connection] instance.
+  ///
+  /// The [action] parameter should be an enumeration representing the desired
+  /// action to be performed on the server. The [data] parameter is a list of
+  /// integers containing any additional data required for the action.
+  ///
+  /// Example usage:
+  ///
+  /// ```dart
+  /// streamService.requestAction(GameAction.swapItem, [4, 7]);
+  /// ```
+  ///
+  /// In this example, the `GameAction.swapItem` action is requested with the
+  /// additional information `[4, 7]` to swap an item from position `4` to `7`
+  /// of the inventory. The server should check if the action can be performed
+  /// and send the updated state with a valid [StatePacket] back to the
+  /// application.
+  void requestAction(Enum action, List<int> data) {
+    _connection.sendRequest(<int>[
+      Client.action,
+      action.index,
+      ...data,
+    ]);
+  }
+
   /// Sends a request to the server to explicitly change the game state to the
   /// specified [state] using the [Connection] instance.
   ///
@@ -376,32 +402,6 @@ class StreamService {
     _connection.sendRequest(<int>[
       Client.update,
       update.index,
-    ]);
-  }
-
-  /// Sends a request to the server to perform the specified [action] with the
-  /// given [data] using the [Connection] instance.
-  ///
-  /// The [action] parameter should be an enumeration representing the desired
-  /// action to be performed on the server. The [data] parameter is a list of
-  /// integers containing any additional data required for the action.
-  ///
-  /// Example usage:
-  ///
-  /// ```dart
-  /// streamService.requestAction(GameAction.swapItem, [4, 7]);
-  /// ```
-  ///
-  /// In this example, the `GameAction.swapItem` action is requested with the
-  /// additional information `[4, 7]` to swap an item from position `4` to `7`
-  /// of the inventory. The server should check if the action can be performed
-  /// and send the updated state with a valid [StatePacket] back to the
-  /// application.
-  void requestAction(Enum action, List<int> data) {
-    _connection.sendRequest(<int>[
-      Client.action,
-      action.index,
-      ...data,
     ]);
   }
 }

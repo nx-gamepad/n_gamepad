@@ -3,7 +3,7 @@ package com.marvinvogl.n_gamepad
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 
-class Accelerometer : Control(1, 0b00100000) {
+class Accelerometer : Control(1, 0b00100000, 0b11000000) {
     private val data = FloatArray(3)
 
     private var x = 0f
@@ -30,7 +30,7 @@ class Accelerometer : Control(1, 0b00100000) {
     private fun prepareSensorData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b11000000)
+            buffer.putByteData(size)
             buffer.putFloatData(data)
 
             return true

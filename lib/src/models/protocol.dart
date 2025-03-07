@@ -188,6 +188,10 @@ class EffectPacket {
   final List<int> data;
 }
 
+// touch action request packet
+// |       1byte | nbytes |
+// | 0b0000_0001 |  data  |
+
 // touch state request packet
 // |       1byte | nbytes |
 // | 0b0000_0101 |  data  |
@@ -196,15 +200,11 @@ class EffectPacket {
 // |       1byte | nbytes |
 // | 0b0000_1001 |  data  |
 
-// touch action request packet
-// |       1byte | nbytes |
-// | 0b0000_1101 |  data  |
-
 class Client {
+  static const int action = 1;
   static const int broadcast = 3;
   static const int state = 5;
   static const int update = 9;
-  static const int action = 13;
 }
 
 // server state packet

@@ -4,7 +4,7 @@ import android.view.KeyEvent
 
 class Button(
     char: Char,
-) : Control(1, 0b00000001) {
+) : Control(1, 0b00000001, 0b00100000) {
     companion object {
         private var ordinal = 0
     }
@@ -52,7 +52,7 @@ class Button(
     private fun prepareKeyUpData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b00100000)
+            buffer.putByteData(size)
             buffer.putIntData(data)
 
             return true

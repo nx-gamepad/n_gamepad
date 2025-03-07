@@ -4,7 +4,7 @@ import android.view.MotionEvent
 
 class Joystick(
     private val hand: Hand,
-) : Control(1, hand.joystick) {
+) : Control(1, hand.joystick, 0b10000000) {
     private val data = FloatArray(2)
 
     private var threshold = 0
@@ -42,7 +42,7 @@ class Joystick(
     private fun prepareMotionData(buffer: ControlBuffer): Boolean {
         if (transmission) {
             buffer.bitfield(this)
-            buffer.putByteData(0b10000001 + hand.ordinal + threshold)
+            buffer.putByteData(size + hand.ordinal + 1 + threshold)
             buffer.putFloatData(data)
 
             return true

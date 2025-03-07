@@ -6,6 +6,7 @@ import kotlin.math.abs
 abstract class Control(
     val block: Int,
     val bitmask: Int,
+    val size: Int,
 ) {
     private var allowed = true
     private var accepted = true

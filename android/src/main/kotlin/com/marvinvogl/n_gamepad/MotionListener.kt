@@ -20,10 +20,10 @@ class MotionListener(
 
                 connection.send(KeyListener.buffer)
 
-                gamepad.joystickLeft.onEvent(event)
-                gamepad.joystickRight.onEvent(event)
                 gamepad.triggerLeft.onEvent(event)
                 gamepad.triggerRight.onEvent(event)
+                gamepad.joystickLeft.onEvent(event)
+                gamepad.joystickRight.onEvent(event)
 
                 return connection.send(buffer)
             }

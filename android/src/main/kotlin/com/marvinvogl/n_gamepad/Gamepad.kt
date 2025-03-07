@@ -22,10 +22,10 @@ class Gamepad {
     )
 
     val dpad = Dpad()
-    val joystickLeft = Joystick(Hand.LEFT)
-    val joystickRight = Joystick(Hand.RIGHT)
     val triggerLeft = Trigger(Hand.LEFT, button[KeyEvent.KEYCODE_BUTTON_L2]!!)
     val triggerRight = Trigger(Hand.RIGHT, button[KeyEvent.KEYCODE_BUTTON_R2]!!)
+    val joystickLeft = Joystick(Hand.LEFT)
+    val joystickRight = Joystick(Hand.RIGHT)
 
     val control = mapOf(
         "gyroscope" to gyroscope,
